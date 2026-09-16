@@ -1339,3 +1339,75 @@ def main():
 # ==================================================
 if __name__ == "__main__":
     main()
+    # ==================================================
+# 🤖 ASISTENTE INTELIGENTE — IA DE ATENCIÓN AL CLIENTE
+# ==================================================
+st.divider()
+st.subheader("🤖 Asistente de Atención — CONTINENTAL STYLE")
+st.caption("Pregúntame sobre tallas, precios, disponibilidad, envíos...")
+
+# Base de conocimientos de tu tienda
+base_conocimiento = """
+TIENDA: CONTINENTAL STYLE 🌍
+PRODUCTOS: Ropa, tenis y calzado de estilo europeo y americano.
+HORARIOS: Lunes a Sábado de 8:00 AM a 7:00 PM.
+UBICACIÓN: Santo Domingo, República Dominicana.
+ENVÍOS: A toda la República Dominicana — de 2 a 3 días hábiles.
+PAGOS: Transferencia bancaria, efectivo y pagos por WhatsApp.
+TALLAS: Disponibles desde la 38 hasta la 46.
+GARANTÍA: Todos los productos con garantía.
+CONTACTO: Escríbenos por WhatsApp para pedidos directos.
+"""
+
+# Inicializar historial de conversación
+if "chat_historial" not in st.session_state:
+    st.session_state.chat_historial = []
+
+# Mostrar mensajes anteriores
+for mensaje in st.session_state.chat_historial:
+    with st.chat_message(mensaje["rol"]):
+        st.write(mensaje["contenido"])
+
+# Entrada del usuario
+pregunta = st.chat_input("Escribe tu pregunta aquí...")
+
+if pregunta:
+    # Guardar y mostrar la pregunta
+    st.session_state.chat_historial.append({"rol": "usuario", "contenido": pregunta})
+    with st.chat_message("usuario"):
+        st.write(pregunta)
+    
+    # Generar respuesta inteligente
+    p = pregunta.lower()
+    
+    if "precio" in p or "cuánto" in p or "valor" in p or "cuesta" in p:
+        respuesta = "💰 Los precios varían según el producto. Visita la sección de Productos para ver todo con su precio. También puedes escribirnos por WhatsApp para cotizar 📱"
+    
+    elif "talla" in p or "medida" in p or "tienen" in p and "talla" in p:
+        respuesta = "👟 Tenemos tallas disponibles desde la 38 hasta la 46. Revisa cada producto para verificar disponibilidad ✅"
+    
+    elif "disponible" in p or "hay" in p or "existe" in p:
+        respuesta = "✅ Todo lo que ves en la tienda está disponible. Si no encuentras algo, pregúntanos por WhatsApp y lo conseguimos por ti 🌍"
+    
+    elif "envío" in p or "entrega" in p or "llegar" in p or "cuánto tarda" in p:
+        respuesta = "🚚 Realizamos envíos a toda la República Dominicana. Tiempo de entrega: 2 a 3 días hábiles 🇩🇴"
+    
+    elif "pago" in p or "pagar" in p or "forma de pago" in p or "aceptan" in p:
+        respuesta = "💳 Aceptamos: Transferencia bancaria, efectivo y pagos por WhatsApp. Elige tu método al finalizar la compra ✅"
+    
+    elif "horario" in p or "abierto" in p or "hora" in p or "cuándo" in p:
+        respuesta = "🕐 Estamos disponibles de Lunes a Sábado de 8:00 AM a 7:00 PM. ¡Escríbenos a cualquier hora que te respondemos! 📱"
+    
+    elif "dónde" in p or "ubicación" in p or "dirección" in p or "están" in p:
+        respuesta = "📍 Estamos en Santo Domingo, República Dominicana. Contáctanos por WhatsApp para la dirección exacta y citas personalizadas 📲"
+    
+    elif "hola" in p or "buenos días" in p or "buenas" in p or "saludos" in p:
+        respuesta = "👋 ¡Hola! Bienvenido a CONTINENTAL STYLE 🌍. Tenemos ropa y calzado de estilo europeo y americano. ¿En qué te puedo ayudar? Pregúntame por tallas, envíos, precios o disponibilidad 🛍️"
+    
+    else:
+        respuesta = "😊 Gracias por escribirnos. En CONTINENTAL STYLE traemos lo mejor de Europa y América. ¿Buscas algo en especial? Puedo ayudarte con tallas, precios, envíos y disponibilidad ✅"
+    
+    # Mostrar y guardar respuesta
+    st.session_state.chat_historial.append({"rol": "asistente", "contenido": respuesta})
+    with st.chat_message("asistente"):
+        st.write(respuesta)
