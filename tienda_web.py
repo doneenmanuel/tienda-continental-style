@@ -276,7 +276,95 @@ st.set_page_config(
     page_icon="🌍",
     layout="wide"
 )
+# ==================================================
+# 📱 AJUSTES DE DISEÑO RESPONSIVO — CELULAR
+# ==================================================
+st.markdown("""
+<style>
+/* Títulos que no se rompan en celular */
+@media (max-width: 768px) {
+    h1, h2, .big-title {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        word-break: keep-all !important;
+    }
+    .welcome-box {
+        padding: 1.5rem !important;
+    }
+    /* Botones más cómodos en celular */
+    .stButton > button, a[href*="wa.me"] {
+        font-size: 1rem !important;
+        padding: 0.6rem 1.2rem !important;
+        min-height: 48px !important;
+    }
+}
+/* Nunca cortar palabras */
+* {
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+}
+</style>
+""", unsafe_allow_html=True)
+# ==================================================
+# 📱 DISEÑO QUE SE VE BIEN EN CELULAR Y COMPUTADORA
+# ==================================================
+st.markdown("""
+<style>
+/* Que nada se salga de la pantalla */
+* {
+    box-sizing: border-box;
+    max-width: 100% !important;
+}
 
+/* Espaciado limpio */
+.block-container {
+    padding: 1rem 1.2rem;
+}
+
+/* En celular: columnas se ponen una debajo de otra */
+@media only screen and (max-width: 768px) {
+    .block-container {
+        padding: 1rem !important;
+    }
+    div[data-testid="column"] {
+        width: 100% !important;
+        flex: unset !important;
+        margin-bottom: 1.2rem;
+    }
+    /* Botones más grandes para tocar con el dedo */
+    button {
+        width: 100% !important;
+        min-height: 50px;
+        font-size: 16px !important;
+    }
+    /* Letras cómodas de leer */
+    h1 { font-size: 1.7rem !important; }
+    h2 { font-size: 1.4rem !important; }
+    p, label { font-size: 15px !important; }
+}
+
+/* Tarjetas de producto bonitas */
+.tarjeta-producto {
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+}
+.tarjeta-producto:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+/* Imágenes bien alineadas */
+img {
+    object-fit: cover;
+    border-radius: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
